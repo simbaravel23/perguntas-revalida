@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProvaModule } from './provas/provas.module';
+import { UsuarioModule } from './usuario/usuario.module';
 import { ConfigModule } from '@nestjs/config';
 import { MysqlConfigService } from './config/config.service'; // Importa o serviço de configuração do MySQL
 
