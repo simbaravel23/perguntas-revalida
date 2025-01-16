@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import { MysqlConfigService } from './config/config.service';
 import { ProvaModule } from './provas/provas.module';
 import { UsuarioModule } from './usuario/usuario.module';
-import { ConfigModule } from '@nestjs/config';
-import { MysqlConfigService } from './config/config.service'; // Importa o serviço de configuração do MySQL
 
 @Module({
   imports: [
-        ConfigModule.forRoot({
+    ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env', // ou o caminho para o seu arquivo .env
     }),
     TypeOrmModule.forRootAsync({
       useClass: MysqlConfigService, // Usa o serviço de configuração do MySQL
       inject: [MysqlConfigService],
     }),
+    ProvaModule,
+    UsuarioModule,
   ],
 })
 export class AppModule {}
